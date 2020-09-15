@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "840877197349",
+    "firebase_url": "https://magang-app.firebaseio.com",
+    "project_id": "magang-app",
+    "storage_bucket": "magang-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840877197349:android:7434ca3f1b45f8408997cc",
+        "android_client_info": {
+          "package_name": "com.ala.magang_apps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840877197349-t28bhqmukqvpttt8jt2c9gh8jbqnlurj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ala.magang_apps",
+            "certificate_hash": "e11aa08171808ddf7e2f1d1b3fbe28941ae9c837"
+          }
+        },
+        {
+          "client_id": "840877197349-5dirjh7j35jd3ge3oj5kld91hohomk4k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLH1713JBZZH8zKPHfzB_gG8B66ev_2V8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840877197349-5dirjh7j35jd3ge3oj5kld91hohomk4k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

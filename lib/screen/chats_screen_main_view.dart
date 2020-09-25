@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ChatsScreenMainView extends StatefulWidget {
   ChatsScreenMainView({Key key}) : super(key: key);
-a
+
   @override
   _ChatsScreenMainViewState createState() => _ChatsScreenMainViewState();
 }

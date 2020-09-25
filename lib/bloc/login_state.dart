@@ -1,33 +1,20 @@
-import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+part of 'login_cubit.dart';
 
-abstract class LoginState extends Equatable{}
-class InitialLoginState extends LoginState{
+class LoginState extends Equatable {
+  final PhoneNumber phoneNumber;
+  final FormzStatus status;
+
+  const LoginState(
+      {this.phoneNumber = const PhoneNumber.pure(),
+      this.status = FormzStatus.pure});
+
   @override
-  List<Object> get props=>[];
-}
-class OtpSentState extends LoginState{
-  List<Object> get props=>[];
-}
-class LoadingState extends LoginState{
-  List<Object> get props=>[];
-}
-class OtpVerifiedState extends LoginState{
-  List<Object> get props=>[];
-}
-class LoginCompleteState extends LoginState{
-  FirebaseUser firebaseUser;
-  LoginCompleteState(this.firebaseUser);
-  FirebaseUser getUser(){return firebaseUser;}
-  List<Object> get props =>[firebaseUser];
-}
-class ExceptionState extends LoginState{
-  String message;
-  ExceptionState({this.message});
-  List<Object> get props=>[message];
-}
-class OtpExceptionState extends LoginState{
-  String message;
-  OtpExceptionState({this.message});
-  List<Object> get props=> [message];
+  // TODO: implement props
+  List<Object> get props => [phoneNumber, status];
+
+  LoginState copyWith({PhoneNumber phoneNumber, FormzStatus status}) {
+    return LoginState(
+        phoneNumber: phoneNumber ?? this.phoneNumber,
+        status: status ?? this.status);
+  }
 }

@@ -1,38 +1,49 @@
 import 'dart:async';
-import 'package:magang_apps/bloc/authentication_event.dart';
 
-import 'bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magang_apps/repository/repository.dart';
-import '';
+import 'package:magang_apps/model/user.dart';
+import 'package:magang_apps/repository/AuthenticationRepository.dart';
+import 'package:meta/meta.dart';
+import 'package:pedantic/pedantic.dart';
 
-class AuthenticationBloc extends Bloc<AuthenticationEvent,AuthenticationState>{
-  final UserRepository userRepository;
+part 'authentication_event.dart';
 
-  AuthenticationBloc({this.userRepository,}) : super(null);
-  AuthenticationState get initialState => InitialAuthenticationState();
+part 'authentication_state.dart';
 
+class AuthenticationBloc
+    extends Bloc<AuthenticationEvent, AuthenticationState> {
+  final AuthenticationRepository _userRepository;
+  StreamSubscription<UserModel> user;
 
-  @override
-  Stream<AuthenticationState> mapEventToState(AuthenticationEvent event)async*{
-    if(event is AppStarted){
-      final bool hasToken= await userRepository.getUser()!=null;
-      if(hasToken){
-        yield Authenticated();
-      }
-      else{
-        yield UnAuthenticated();
-      }
-    }
-    if(event is LoggedIn){
-      yield Loading();
-      yield Authenticated();
-    }
-    if(event is LoggedOut){
-      yield Loading();
-      yield UnAuthenticated();
-    }
-
+  AuthenticationBloc({
+    @required AuthenticationRepository userRepository,
+  })  : assert(userRepository != null),
+        _userRepository = userRepository,
+        super(const AuthenticationState.unknown()) {
+    user = _userRepository.user
+        .listen((user) => add(AuthenticationUserChanged(user)));
   }
 
+  @override
+  Stream<AuthenticationState> mapEventToState(
+      AuthenticationEvent event) async* {
+    if (event is AuthenticationUserChanged) {
+      yield _mapAuthenticationUserChangedState(event);
+    } else if (event is AuthenticationLogoutRequest) {
+      unawaited(_userRepository.logOutUserAccount());
+    }
+  }
+
+  Future<void> close() {
+    user?.cancel();
+    return super.close();
+  }
+
+  AuthenticationState _mapAuthenticationUserChangedState(
+      AuthenticationUserChanged userChanged) {
+    return userChanged.userModel != UserModel.empty
+        ? AuthenticationState.authenticated(userChanged.userModel)
+        : const AuthenticationState.unauthenticated();
+  }
 }

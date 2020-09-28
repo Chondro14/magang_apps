@@ -1,20 +1,20 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
-import 'BottomNavigationMainView.dart';
+import 'LoginScreenMainView.dart';
 
-class SplashScreenMainView extends StatefulWidget {
-  SplashScreenMainView({Key key}) : super(key: key);
+class SplashScreenMainView1 extends StatefulWidget {
+  SplashScreenMainView1({Key key}) : super(key: key);
 
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => SplashScreenMainView());
+    return MaterialPageRoute<void>(builder: (_) => SplashScreenMainView1());
   }
 
   @override
-  _SplashScreenMainViewState createState() => _SplashScreenMainViewState();
+  _SplashScreenMainView1State createState() => _SplashScreenMainView1State();
 }
 
-class _SplashScreenMainViewState extends State<SplashScreenMainView> {
+class _SplashScreenMainView1State extends State<SplashScreenMainView1> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get _navigator => _navigatorKey.currentState;
@@ -38,10 +38,8 @@ class _SplashScreenMainViewState extends State<SplashScreenMainView> {
             animation: 'Untitled',
             callback: (name) {
               setState(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BottomnavigationMainView()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
               });
             },
           )),

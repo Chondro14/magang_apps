@@ -4,9 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class UserRepository {
   final FirebaseAuth firebaseAuth;
+
   UserRepository({FirebaseAuth firebaseAuth})
       : firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
-  Future<void> sendOtp(
+
+  Future<bool> sendOtp(
       String phoneNumber,
       Duration timeout,
       PhoneVerificationFailed phoneVerificationFailed,
@@ -19,15 +21,15 @@ class UserRepository {
         verificationFailed: phoneVerificationFailed,
         codeSent: phoneCodeSent,
         codeAutoRetrievalTimeout: phoneCodeAutoRetrievalTimeout);
-
   }
-  Future<void> verifyLogin(
+
+  Future<bool> verifyLogin(
     String verificationId,
     String smsCode,
   ) async {
     AuthCredential authCredential = PhoneAuthProvider.credential(
         verificationId: verificationId, smsCode: smsCode);
-    return firebaseAuth.signInWithCredential(authCredential);
+    await firebaseAuth.signInWithCredential(authCredential);
   }
 
   Future<User> getUser() async {

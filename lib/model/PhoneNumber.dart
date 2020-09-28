@@ -7,8 +7,8 @@ class PhoneNumber extends FormzInput<String, PhoneNumberError> {
 
   PhoneNumber.dirty([String value]) : super.dirty(value);
   static final RegExp phone = RegExp(
-    r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$',
-  );
+      // ignore: valid_regexps
+      '\+?([ -]?\d+)+|\(\d+\)([ -]\d+)');
 
   @override
   validator(String value) {

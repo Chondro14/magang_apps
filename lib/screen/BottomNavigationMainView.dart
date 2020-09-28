@@ -20,11 +20,9 @@ class BottomnavigationMainView extends StatefulWidget {
   BottomnavigationMainView({Key key}) : super(key: key);
 
   static Route route() {
-    Future.delayed(Duration(seconds: 5));
     return MaterialPageRoute<void>(
-        builder: (_) => BottomnavigationMainView(),
-        settings:
-            RouteSettings(arguments: Future.delayed(Duration(seconds: 5))));
+      builder: (_) => BottomnavigationMainView(),
+    );
   }
 
   @override
